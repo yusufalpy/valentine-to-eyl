@@ -46,6 +46,17 @@
             z-index: 10;
         }
 
+        .photo-frame {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            border: 5px solid white;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
         .photo-frame:hover {
             transform: scale(1.1) rotate(3deg);
         }
@@ -133,7 +144,7 @@
 
         <div class="music-control">
             <audio id="bgMusic" loop>
-                <source src="https://files.catbox.moe/4g1g4c.mp3" type="audio/mpeg">
+                <source src="BURAYA_MUZIK_LINKINI_YAPISTIR" type="audio/mpeg">
             </audio>
             <button class="play-btn" onclick="toggleMusic()" id="btnText">🎵 Müziği Başlat</button>
         </div>
@@ -204,29 +215,6 @@
             setTimeout(() => heart.remove(), 5000);
         }
         setInterval(createHeart, 300);
-
-
-        document.addEventListener('mousemove', function(e) {
-    var heart = document.createElement("div");
-    heart.innerHTML = "❤️";
-    heart.style.position = "fixed";
-    heart.style.left = e.clientX + 'px';
-    heart.style.top = e.clientY + 'px';
-    heart.style.fontSize = "15px";
-    heart.style.pointerEvents = "none";
-    heart.style.transition = "all 0.8s ease";
-    heart.style.opacity = "1";
-    document.body.appendChild(heart);
-
-    setTimeout(function() {
-        heart.style.transform = "translateY(-50px) scale(2)";
-        heart.style.opacity = "0";
-    }, 100);
-
-    setTimeout(function() {
-        heart.remove();
-    }, 800);
-});
     </script>
 </body>
 </html>
