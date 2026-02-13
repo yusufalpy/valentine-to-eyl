@@ -1,94 +1,176 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<title>Seni Seviyorum Bitanem 🤍</title>
-<style>
-body {
-  background: #ffdde1;
-  text-align: center;
-  font-family: Arial, sans-serif;
-  color: #b3003b;
-  padding-top: 50px;
-  overflow-x: hidden;
-}
-h1 {
-  font-size: 3em;
-  animation: pulse 1s infinite ease-in-out;
-}
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-p {
-  font-size: 1.5em;
-  margin-top: 20px;
-}
-#confetti {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-.confetti-piece {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: #ff69b4;
-  opacity: 0.8;
-  animation: fall linear infinite;
-}
-@keyframes fall {
-  0% { transform: translateY(-10px) rotate(0deg); }
-  100% { transform: translateY(100vh) rotate(360deg); }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seni Seviyorum Bitanem 🤍</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-light: #ffdde1;
+            --pink-dark: #ee9ca7;
+            --heart-color: #ff4d6d;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--pink-light), var(--pink-dark));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Dancing Script', cursive;
+            color: #b3003b;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.4);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            z-index: 10;
+            max-width: 90%;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            font-family: 'Pacifico', cursive;
+            animation: pulse 1.5s infinite ease-in-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        #message {
+            font-size: 1.8rem;
+            height: 2.5rem; /* Yazı değişirken zıplama yapmasın diye */
+            transition: opacity 0.5s;
+        }
+
+        /* Sayaç Kutuları */
+        .countdown-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            font-family: Arial, sans-serif;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 60px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .time-box label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        #confetti {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px; height: 10px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
 </head>
 <body>
-<h1>💘 SENİN İÇİN 💘</h1>
-<p id="message">Geçen her saniye biraz daha aşık oluyorum sana…</p>
-<p id="anniversary"></p>
+
+<div class="container">
+    <h1>💘 SENİN İÇİN 💘</h1>
+    <p id="message">Yükleniyor...</p>
+    
+    <div class="countdown-container">
+        <div class="time-box"><span id="days">0</span><label>Gün</label></div>
+        <div class="time-box"><span id="hours">0</span><label>Saat</label></div>
+        <div class="time-box"><span id="minutes">0</span><label>Dakika</label></div>
+        <div class="time-box"><span id="seconds">0</span><label>Saniye</label></div>
+    </div>
+    <p style="margin-top: 20px; font-size: 1.2rem;">21 Aralık 2025'ten beri seninle... ❤️</p>
+</div>
 
 <div id="confetti"></div>
 
 <script>
+    // Mesajlar
+    const messages = [
+        "Seni seviyorum 😍",
+        "Her anım seninle güzel ❤️",
+        "Kalbim hep seninle 💘",
+        "Sevgililer Günümüz Kutlu Olsun ❤️"
+    ];
+    
+    let msgIndex = 0;
+    const messageEl = document.getElementById("message");
+    
+    setInterval(() => {
+        messageEl.style.opacity = 0;
+        setTimeout(() => {
+            messageEl.textContent = messages[msgIndex % messages.length];
+            messageEl.style.opacity = 1;
+            msgIndex++;
+        }, 500);
+    }, 3000);
 
-  const messages = [
-  "Seni seviyorum 😍",
-  "Beraberiz ❤️",
-  "Kalbim hep seninle 💘",
-  "Sevgililer Günümüz Kutlu Olsun Sevgilim ❤️"
-];
-let i = 0;
-setInterval(()=>{
-  document.getElementById("message").textContent = messages[i % messages.length];
-  i++;
-}, 2500);
+    // Canlı Sayaç
+    const anniversary = new Date("2025-12-21T00:00:00");
 
-  
-const anniversary = new Date("2025-12-21T00:00:00");
-function updateAnniversary() {
-  const now = new Date();
-  const diffTime = Math.abs(now - anniversary);
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  document.getElementById("anniversary").textContent = 
-    21 Aralık'tan beri ${diffDays} gün seninle beraberim ❤️;
-}
-updateAnniversary();
+    function updateCounter() {
+        const now = new Date();
+        const diff = now - anniversary;
 
-function createConfetti() {
-  const confetti = document.createElement("div");
-  confetti.className = "confetti-piece";
-  confetti.style.left = Math.random() * window.innerWidth + "px";
-  confetti.style.backgroundColor = hsl(${Math.random()*360}, 100%, 70%);
-  confetti.style.animationDuration = (Math.random()*3 + 2) + "s";
-  document.getElementById("confetti").appendChild(confetti);
-  setTimeout(() => confetti.remove(), 5000);
-}
-setInterval(createConfetti, 200);
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / 1000 / 60) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("days").textContent = d;
+        document.getElementById("hours").textContent = h;
+        document.getElementById("minutes").textContent = m;
+        document.getElementById("seconds").textContent = s;
+    }
+
+    setInterval(updateCounter, 1000);
+    updateCounter();
+
+    // Konfeti (Kalp şeklinde veya renkli)
+    function createConfetti() {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti-piece";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        confetti.style.borderRadius = "50%"; // Daire şeklinde
+        confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.getElementById("confetti").appendChild(confetti);
+        setTimeout(() => confetti.remove(), 5000);
+    }
+    setInterval(createConfetti, 150);
 </script>
+
 </body>
 </html>
