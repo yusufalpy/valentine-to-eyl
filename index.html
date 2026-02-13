@@ -7,169 +7,162 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pink-light: #ffdde1;
-            --pink-dark: #ee9ca7;
-            --heart-color: #ff4d6d;
+            --pink-bg: #ffafbd;
+            --pink-dark: #ffc3a0;
+            --accent: #b3003b;
         }
 
         body {
-            background: linear-gradient(135deg, var(--pink-light), var(--pink-dark));
+            background: linear-gradient(135deg, var(--pink-bg), var(--pink-dark));
             min-height: 100vh;
+            margin: 0;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: 'Dancing Script', cursive;
-            color: #b3003b;
-            margin: 0;
             overflow: hidden;
+            color: var(--accent);
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.4);
-            padding: 2rem;
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.4);
             z-index: 10;
-            max-width: 90%;
         }
 
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            font-family: 'Pacifico', cursive;
-            animation: pulse 1.5s infinite ease-in-out;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        /* Fotoğraf Çerçevesi - Photoshop becerilerini burada göster! */
+        .photo-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 6px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+            background: #fff;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        #message {
-            font-size: 1.8rem;
-            height: 2.5rem; /* Yazı değişirken zıplama yapmasın diye */
-            transition: opacity 0.5s;
+        h1 { font-family: 'Pacifico', cursive; font-size: 2.2rem; margin: 10px 0; }
+
+        #message { font-size: 1.4rem; min-height: 50px; transition: opacity 0.5s; }
+
+        /* Canlı Sayaç */
+        .timer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 25px 0;
         }
 
-        /* Sayaç Kutuları */
-        .countdown-container {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-top: 30px;
-            font-family: Arial, sans-serif;
+        .timer-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 8px;
+            border-radius: 12px;
+            font-family: sans-serif;
         }
 
-        .time-box {
+        .timer-box span { display: block; font-size: 1.1rem; font-weight: bold; }
+        .timer-box label { font-size: 0.6rem; text-transform: uppercase; color: #888; }
+
+        /* Müzik Çalar */
+        .music-wrapper {
+            margin-top: 20px;
             background: rgba(255, 255, 255, 0.7);
             padding: 10px;
-            border-radius: 10px;
-            min-width: 60px;
+            border-radius: 50px;
         }
 
-        .time-box span {
-            display: block;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
+        audio { width: 100%; height: 30px; }
 
-        .time-box label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
-
-        #confetti {
+        /* Arka Plan Kalpler */
+        .floating-heart {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            color: rgba(255, 77, 109, 0.6);
             pointer-events: none;
+            z-index: 1;
+            animation: move linear infinite;
         }
 
-        .confetti-piece {
-            position: absolute;
-            width: 10px; height: 10px;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        @keyframes move {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>💘 SENİN İÇİN 💘</h1>
-    <p id="message">Yükleniyor...</p>
-    
-    <div class="countdown-container">
-        <div class="time-box"><span id="days">0</span><label>Gün</label></div>
-        <div class="time-box"><span id="hours">0</span><label>Saat</label></div>
-        <div class="time-box"><span id="minutes">0</span><label>Dakika</label></div>
-        <div class="time-box"><span id="seconds">0</span><label>Saniye</label></div>
+    <div class="photo-container">
+        <img src="biz.jpg" alt="Sevgilim ve Ben">
     </div>
-    <p style="margin-top: 20px; font-size: 1.2rem;">21 Aralık 2025'ten beri seninle... ❤️</p>
+
+    <h1>Sevgililer Günümüz Kutlu Olsun ❤️</h1>
+    <p id="message">Seni her gün daha çok seviyorum...</p>
+
+    <div class="timer">
+        <div class="timer-box"><span id="d">0</span><label>Gün</label></div>
+        <div class="timer-box"><span id="h">0</span><label>Saat</label></div>
+        <div class="timer-box"><span id="m">0</span><label>Dk</label></div>
+        <div class="timer-box"><span id="s">0</span><label>Sn</label></div>
+    </div>
+
+    <div class="music-wrapper">
+        <audio controls loop>
+            <source src="sarkimiz.mp3" type="audio/mpeg">
+        </audio>
+    </div>
 </div>
 
-<div id="confetti"></div>
-
 <script>
-    // Mesajlar
-    const messages = [
-        "Seni seviyorum 😍",
-        "Her anım seninle güzel ❤️",
-        "Kalbim hep seninle 💘",
-        "Sevgililer Günümüz Kutlu Olsun ❤️"
-    ];
-    
-    let msgIndex = 0;
-    const messageEl = document.getElementById("message");
-    
+    // Mesaj Döngüsü
+    const msgs = ["İyi ki varsın ❤️", "Hayatımın en güzel hikayesi sensin 😍", "21 Aralık'tan beri her gün şükrediyorum 💘", "Daima beraber... ✨"];
+    let i = 0;
     setInterval(() => {
-        messageEl.style.opacity = 0;
+        const el = document.getElementById("message");
+        el.style.opacity = 0;
         setTimeout(() => {
-            messageEl.textContent = messages[msgIndex % messages.length];
-            messageEl.style.opacity = 1;
-            msgIndex++;
+            el.textContent = msgs[i % msgs.length];
+            el.style.opacity = 1;
+            i++;
         }, 500);
-    }, 3000);
+    }, 4000);
 
-    // Canlı Sayaç
-    const anniversary = new Date("2025-12-21T00:00:00");
+    // Canlı Geri Sayım (21 Aralık 2025)
+    const start = new Date("2025-12-21T00:00:00").getTime();
+    setInterval(() => {
+        const now = new Date().getTime();
+        const diff = now - start;
+        document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+    }, 1000);
 
-    function updateCounter() {
-        const now = new Date();
-        const diff = now - anniversary;
-
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const m = Math.floor((diff / 1000 / 60) % 60);
-        const s = Math.floor((diff / 1000) % 60);
-
-        document.getElementById("days").textContent = d;
-        document.getElementById("hours").textContent = h;
-        document.getElementById("minutes").textContent = m;
-        document.getElementById("seconds").textContent = s;
+    // Kalp Yağmuru
+    function createHeart() {
+        const h = document.createElement("div");
+        h.className = "floating-heart";
+        h.innerHTML = "❤️";
+        h.style.left = Math.random() * 100 + "vw";
+        h.style.fontSize = Math.random() * 20 + 10 + "px";
+        h.style.animationDuration = Math.random() * 3 + 4 + "s";
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 7000);
     }
-
-    setInterval(updateCounter, 1000);
-    updateCounter();
-
-    // Konfeti (Kalp şeklinde veya renkli)
-    function createConfetti() {
-        const confetti = document.createElement("div");
-        confetti.className = "confetti-piece";
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
-        confetti.style.borderRadius = "50%"; // Daire şeklinde
-        confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
-        document.getElementById("confetti").appendChild(confetti);
-        setTimeout(() => confetti.remove(), 5000);
-    }
-    setInterval(createConfetti, 150);
+    setInterval(createHeart, 400);
 </script>
 
 </body>
